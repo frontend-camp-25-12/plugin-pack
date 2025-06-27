@@ -1,14 +1,10 @@
 # Plugin Pack - 插件打包命令工具
 
 专门用于将插件项目打包成 asar 格式的命令行工具。它可以帮助开发者快速打包插件项目，并确保生成符合标准的插件包。
-
+![](demo.png)
 ## 安装
 
-```bash
-npm install -g git+https://github.com/frontend-camp-25-12/plugin-pack
-```
-
-或本地安装：
+安装到项目：
 
 ```bash
 npm install git+https://github.com/frontend-camp-25-12/plugin-pack
@@ -16,10 +12,6 @@ npm install git+https://github.com/frontend-camp-25-12/plugin-pack
 
 ## 使用方法
 
-```bash
-plugin-pack <source> [options]
-```
-或使用npx
 ```bash
 npx plugin-pack <source> [options]
 ```
