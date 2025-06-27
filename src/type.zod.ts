@@ -1,3 +1,5 @@
+import { match } from "assert";
+import { features } from "process";
 import { z } from "zod";
 
 /**
@@ -23,7 +25,7 @@ export const PluginDefinitionSchema = z.object({
     }).optional(),
   features: z.array(z.object({
     code: z.string(), // 功能代码，用于通过命令输入进入插件时，识别用户通过哪个feature进入。无code表明用户是通过“点击”进入插件的
-    label: z.string(), // 功能的显示名称
+    label: z.string(), // 功能的显示名称，注意它仅供显示，而不会参与命令检索。应该设置cmds来定义这个feature如何被检索到。
     hotKey: z.boolean().optional().default(false), // 是否可从热键进入，默认为false
     searchable: z.boolean().optional().default(true), // 是否可被搜索到，默认为true。与hotkey结合可以提供仅能通过热键进入的功能
     cmds: z.array(z.union([

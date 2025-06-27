@@ -25,7 +25,7 @@ exports.PluginDefinitionSchema = zod_1.z.object({
     }).optional(),
     features: zod_1.z.array(zod_1.z.object({
         code: zod_1.z.string(), // 功能代码，用于通过命令输入进入插件时，识别用户通过哪个feature进入。无code表明用户是通过“点击”进入插件的
-        label: zod_1.z.string(), // 功能的显示名称
+        label: zod_1.z.string(), // 功能的显示名称，注意它仅供显示，而不会参与命令检索。应该设置cmds来定义这个feature如何被检索到。
         hotKey: zod_1.z.boolean().optional().default(false), // 是否可从热键进入，默认为false
         searchable: zod_1.z.boolean().optional().default(true), // 是否可被搜索到，默认为true。与hotkey结合可以提供仅能通过热键进入的功能
         cmds: zod_1.z.array(zod_1.z.union([

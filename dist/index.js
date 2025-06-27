@@ -108,10 +108,10 @@ async function packPlugin(sourcePath, pluginJsonPath) {
     const preloadPath = path.join(absoluteSourcePath, pluginConfig.preload || 'preload.js');
     const contentPath = path.join(absoluteSourcePath, pluginConfig.content || 'index.html');
     if (!fs.existsSync(preloadPath)) {
-        console.warn(chalk.yellow(`警告: preload 文件不存在: ${preloadPath}`));
+        throw new Error(`pluginConfig.preload 文件不存在于打包目录: ${preloadPath}`);
     }
     if (!fs.existsSync(contentPath)) {
-        console.warn(chalk.yellow(`警告: content 文件不存在: ${contentPath}`));
+        throw new Error(`pluginConfig.content 文件不存在于打包目录: ${contentPath}`);
     }
     // 准备临时目录用于打包
     const tempDir = path.join(os.tmpdir(), `plugin-pack-${pluginConfig.id}-${Date.now()}`);
