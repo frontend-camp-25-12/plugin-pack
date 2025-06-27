@@ -1,0 +1,72 @@
+name: 同步类型定义
+
+on:
+  repository_dispatch:
+    types: [update-type-definitions]
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  sync-types:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 签出仓库
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 克隆 main-app 仓库
+        run: git clone https://${{ secrets.GH_TOKEN }}@github.com/frontend-camp-25-12/main-app workspace-main-app
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 复制type.zod.ts
+        run: |
+          if [ -f "workspace-main-app/src/share/plugins/type.zod.d.ts" ]; then
+            cp workspace-main-app/src/share/plugins/type.zod.d.ts src/type.zod.ts
+            echo "成功复制 type.zod.ts"
+          else
+            echo "源文件不存在: workspace-main-app/src/share/plugins/type.zod.d.ts"
+            exit 1
+          fi
+
+      - name: 执行构建
+        run: |
+          npm install
+          npm run build
+
+      - name: 更新版本号
+        run: |
+          # 获取当前版本
+          current_version=$(node -p "require('./package.json').version")
+          echo "当前版本: $current_version"
+          
+          # 增加补丁版本号
+          new_version=$(node -p "
+            const semver = require('./package.json').version.split('.');
+            semver[2] = parseInt(semver[2]) + 1;
+            semver.join('.');
+          ")
+          echo "新版本: $new_version"
+          
+          # 更新package.json
+          node -e "
+            const pkg = require('./package.json');
+            pkg.version = '$new_version';
+            require('fs').writeFileSync('./package.json', JSON.stringify(pkg, null, 2) + '\n');
+          "
+
+      - name: 检查是否有变更并提交推送
+        run: |
+          git config user.name "sync-bot"
+          git config user.email "example@example.com"
+          
+          if ! git diff --quiet HEAD; then
+            git add .
+            git commit -m "同步主仓库type.zod.ts"
+            git push origin main
+          else
+            echo "没有变更，跳过提交"
+          fi
