@@ -18,10 +18,12 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         frame: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
         transparent: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
         resizable: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
+        alwaysOnTop: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
     }, "strip", z.ZodTypeAny, {
         frame: boolean;
         transparent: boolean;
         resizable: boolean;
+        alwaysOnTop: boolean;
         width?: number | undefined;
         height?: number | undefined;
         disableTransition?: boolean | undefined;
@@ -32,6 +34,7 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         frame?: boolean | undefined;
         transparent?: boolean | undefined;
         resizable?: boolean | undefined;
+        alwaysOnTop?: boolean | undefined;
     }>>;
     features: z.ZodDefault<z.ZodOptional<z.ZodArray<z.ZodObject<{
         code: z.ZodString;
@@ -102,6 +105,7 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         frame: boolean;
         transparent: boolean;
         resizable: boolean;
+        alwaysOnTop: boolean;
         width?: number | undefined;
         height?: number | undefined;
         disableTransition?: boolean | undefined;
@@ -122,6 +126,7 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         frame?: boolean | undefined;
         transparent?: boolean | undefined;
         resizable?: boolean | undefined;
+        alwaysOnTop?: boolean | undefined;
     } | undefined;
     features?: {
         code: string;
