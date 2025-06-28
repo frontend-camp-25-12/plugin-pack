@@ -5,9 +5,12 @@
 ## 安装
 
 安装到项目：
-
 ```bash
 npm install git+https://github.com/frontend-camp-25-12/plugin-pack
+```
+或全局安装
+```bash
+npm install -g git+https://github.com/frontend-camp-25-12/plugin-pack
 ```
 
 ## 使用方法
