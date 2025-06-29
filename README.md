@@ -21,16 +21,22 @@ npx plugin-pack <source> [options]
 
 ### 参数说明
 
-- `<source>`: 插件源码目录路径（必需）
-- `-p, --plugin <path>`: plugin.json 文件路径（可选，默认在当前目录查找）
+- `<source>`: 插件**产物**目录路径（必需）
+- `-p, --plugin <path>`: plugin.json 文件路径（可选，不提供则在当前目录pwd查找）
+
+**产物**的要求：
+- 对于简单的纯web开发的插件，不需要额外处理，开发文件夹可以视作可直接运行的插件。
+- 如果使用了ui库、导入了其它npm包，产物应该包含运行你的插件所必须的所有外部依赖。
+- 对于renderer：构建成能在浏览器中运行的产物，比如用了react，那么react运行时需要被打包进去（renderer大概不需要你来额外进行改动，毕竟要在electron里面开发调试、看到效果，总要构建成前端产物的）。
+- 对于preload：如果require了electron之外的外部模块，需要使用构建工具将所需的模块一并打包到preload产物中。这样打包之后才能正确运行。可以考虑用vite(rollup)或者webpack，仅externalize electron，把你的preload打包成一个嵌入了外部依赖的最终文件。
 
 ### 示例
 
 ```bash
-# 基本用法 - 在当前目录查找 plugin.json
+# 基本用法 - 在当前目录(.)查找 plugin.json
 plugin-pack .
 
-# 指定插件开发目录路径和 plugin.json 路径
+# 指定插件产物目录路径和 plugin.json 路径
 plugin-pack ./my-plugin -p ./my-plugin/config/plugin.json
 ```
 
@@ -108,7 +114,7 @@ npm run build
 electron-vite build
 ```
 
-2. 打包插件（将构建产物 `out` 目录作为源码目录）：
+2. 打包插件（将构建产物 `out` 目录作为被打包目录）：
 
 ```bash
 plugin-pack ./out
