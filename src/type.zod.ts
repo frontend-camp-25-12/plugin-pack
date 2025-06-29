@@ -23,6 +23,7 @@ export const PluginDefinitionSchema = z.object({
       transparent: z.boolean().optional().default(false), // 是否启用透明窗口，默认为false，启用时需要同时设置frame为false
       resizable: z.boolean().optional().default(true), // 是否允许窗口大小调整，默认为true
       alwaysOnTop: z.boolean().optional().default(false), // 是否总在顶层显示，默认为false
+      closeOnBlur: z.boolean().optional().default(false), // 是否在失去焦点时关闭窗口，默认为false
     }).optional(),
   features: z.array(z.object({
     code: z.string(), // 功能代码，用于通过命令输入进入插件时，识别用户通过哪个feature进入。无code表明用户是通过“点击”进入插件的
