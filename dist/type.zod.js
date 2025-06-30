@@ -24,6 +24,7 @@ exports.PluginDefinitionSchema = zod_1.z.object({
         resizable: zod_1.z.boolean().optional().default(true), // 是否允许窗口大小调整，默认为true
         alwaysOnTop: zod_1.z.boolean().optional().default(false), // 是否总在顶层显示，默认为false
         closeOnBlur: zod_1.z.boolean().optional().default(false), // 是否在失去焦点时关闭窗口，默认为false
+        skipTaskbar: zod_1.z.boolean().optional().default(false), // 是否在任务栏中隐藏窗口，默认为false（windows和linux下有效）
     }).optional(),
     features: zod_1.z.array(zod_1.z.object({
         code: zod_1.z.string(), // 功能代码，用于通过命令输入进入插件时，识别用户通过哪个feature进入。无code表明用户是通过“点击”进入插件的
