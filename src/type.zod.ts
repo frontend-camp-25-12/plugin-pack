@@ -1,6 +1,7 @@
 import { match } from "assert";
 import { features } from "process";
 import { z } from "zod";
+import { validateStrict } from 'compare-versions';
 
 /**
  * 插件的plugin.json文件定义，由插件开发者按需求编写
@@ -9,7 +10,9 @@ export const PluginDefinitionSchema = z.object({
   id: z.string(),  // 插件的唯一标识符
   name: z.string(), // 插件的名称
   description: z.string().optional(), // 插件的描述信息
-  version: z.string(),
+  version: z.string().refine((version) => validateStrict(version), {
+    message: "Invalid version format. Must follow semantic versioning (e.g., 1.0.0).",
+  }), // 插件版本号，必须符合semver规范
   logo: z.string().optional(), // 插件的logo图片路径，相对于插件根目录
   preload: z.string().optional().default('preload.js'), // 插件的preload脚本路径，相对于插件根目录，默认为"preload.js"
   content: z.string().optional().default('index.html'), // 插件的内容网页路径，相对于插件根目录，默认为"index.html"

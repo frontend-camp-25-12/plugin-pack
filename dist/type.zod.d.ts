@@ -6,7 +6,7 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
     id: z.ZodString;
     name: z.ZodString;
     description: z.ZodOptional<z.ZodString>;
-    version: z.ZodString;
+    version: z.ZodEffects<z.ZodString, string, string>;
     logo: z.ZodOptional<z.ZodString>;
     preload: z.ZodDefault<z.ZodOptional<z.ZodString>>;
     content: z.ZodDefault<z.ZodOptional<z.ZodString>>;

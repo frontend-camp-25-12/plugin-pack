@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PluginDefinitionSchema = void 0;
 const zod_1 = require("zod");
+const compare_versions_1 = require("compare-versions");
 /**
  * 插件的plugin.json文件定义，由插件开发者按需求编写
  */
@@ -9,7 +10,9 @@ exports.PluginDefinitionSchema = zod_1.z.object({
     id: zod_1.z.string(), // 插件的唯一标识符
     name: zod_1.z.string(), // 插件的名称
     description: zod_1.z.string().optional(), // 插件的描述信息
-    version: zod_1.z.string(),
+    version: zod_1.z.string().refine((version) => (0, compare_versions_1.validateStrict)(version), {
+        message: "Invalid version format. Must follow semantic versioning (e.g., 1.0.0).",
+    }), // 插件版本号，必须符合semver规范
     logo: zod_1.z.string().optional(), // 插件的logo图片路径，相对于插件根目录
     preload: zod_1.z.string().optional().default('preload.js'), // 插件的preload脚本路径，相对于插件根目录，默认为"preload.js"
     content: zod_1.z.string().optional().default('index.html'), // 插件的内容网页路径，相对于插件根目录，默认为"index.html"
