@@ -106,7 +106,12 @@ async function packPlugin(sourcePath: string, pluginJsonPath?: string): Promise<
     
     // 将 plugin.json 也复制到临时目录
     fs.copyFileSync(pluginJsonFile, path.join(tempDir, 'plugin.json'));
-    
+    // 如果临时目录中存在${pluginConfig.id}.asar，删除它
+    const existingAsarPath = path.join(tempDir, `${pluginConfig.id}.asar`);
+    if (fs.existsSync(existingAsarPath)) {
+      fs.rmSync(existingAsarPath, { recursive: true, force: true });
+    }
+
     // 生成 asar 文件
     const outputPath = path.join(cwd, `${pluginConfig.id}.asar`);
     
