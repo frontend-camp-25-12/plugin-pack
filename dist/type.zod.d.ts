@@ -21,6 +21,7 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         alwaysOnTop: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
         closeOnBlur: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
         skipTaskbar: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
+        focusable: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
     }, "strip", z.ZodTypeAny, {
         frame: boolean;
         transparent: boolean;
@@ -28,6 +29,7 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         alwaysOnTop: boolean;
         closeOnBlur: boolean;
         skipTaskbar: boolean;
+        focusable: boolean;
         width?: number | undefined;
         height?: number | undefined;
         disableTransition?: boolean | undefined;
@@ -41,6 +43,7 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         alwaysOnTop?: boolean | undefined;
         closeOnBlur?: boolean | undefined;
         skipTaskbar?: boolean | undefined;
+        focusable?: boolean | undefined;
     }>>;
     features: z.ZodDefault<z.ZodOptional<z.ZodArray<z.ZodObject<{
         code: z.ZodString;
@@ -114,6 +117,7 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         alwaysOnTop: boolean;
         closeOnBlur: boolean;
         skipTaskbar: boolean;
+        focusable: boolean;
         width?: number | undefined;
         height?: number | undefined;
         disableTransition?: boolean | undefined;
@@ -137,6 +141,7 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         alwaysOnTop?: boolean | undefined;
         closeOnBlur?: boolean | undefined;
         skipTaskbar?: boolean | undefined;
+        focusable?: boolean | undefined;
     } | undefined;
     features?: {
         code: string;

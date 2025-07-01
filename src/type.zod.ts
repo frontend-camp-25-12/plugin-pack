@@ -25,6 +25,7 @@ export const PluginDefinitionSchema = z.object({
       alwaysOnTop: z.boolean().optional().default(false), // 是否总在顶层显示，默认为false
       closeOnBlur: z.boolean().optional().default(false), // 是否在失去焦点时关闭窗口，默认为false
       skipTaskbar: z.boolean().optional().default(false), // 是否在任务栏中隐藏窗口，默认为false（windows和linux下有效）
+      focusable: z.boolean().optional().default(true), // 是否允许窗口获取焦点，默认为true。透明窗口时设置为false可以避免透明窗口上出现灰色背景的窗口标题
     }).optional(),
   features: z.array(z.object({
     code: z.string(), // 功能代码，用于通过命令输入进入插件时，识别用户通过哪个feature进入。无code表明用户是通过“点击”进入插件的

@@ -1,6 +1,6 @@
 {
   "name": "plugin-pack",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "插件打包命令工具，用于将插件项目打包成 asar 格式",
   "main": "dist/index.js",
   "bin": {
