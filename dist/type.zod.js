@@ -45,6 +45,15 @@ exports.PluginDefinitionSchema = zod_1.z.object({
                 type: zod_1.z.literal('any'), // 任意输入都会被匹配上
             })
         ])),
+        i18n: zod_1.z.record(zod_1.z.union([zod_1.z.literal('en'), zod_1.z.literal('zh-CN')]), // 支持的语言，当前仅支持英文(en)和中文(zh-CN)
+        zod_1.z.object({
+            label: zod_1.z.string(), // 对应语言的功能显示名称
+        })).optional()
     })).optional().default([]),
+    i18n: zod_1.z.record(zod_1.z.union([zod_1.z.literal('en'), zod_1.z.literal('zh-CN')]), // 支持的语言，当前仅支持英文(en)和中文(zh-CN)
+    zod_1.z.object({
+        name: zod_1.z.string(), // 对应语言的插件名称
+        description: zod_1.z.string(), // 对应语言的插件描述
+    })).optional(), // 国际化相关
 });
 //# sourceMappingURL=type.zod.js.map

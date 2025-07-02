@@ -66,6 +66,13 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         }, {
             type: "any";
         }>]>, "many">;
+        i18n: z.ZodOptional<z.ZodRecord<z.ZodUnion<[z.ZodLiteral<"en">, z.ZodLiteral<"zh-CN">]>, z.ZodObject<{
+            label: z.ZodString;
+        }, "strip", z.ZodTypeAny, {
+            label: string;
+        }, {
+            label: string;
+        }>>>;
     }, "strip", z.ZodTypeAny, {
         code: string;
         label: string;
@@ -77,6 +84,9 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         } | {
             type: "any";
         })[];
+        i18n?: Partial<Record<"en" | "zh-CN", {
+            label: string;
+        }>> | undefined;
     }, {
         code: string;
         label: string;
@@ -88,7 +98,20 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         })[];
         hotKey?: boolean | undefined;
         searchable?: boolean | undefined;
+        i18n?: Partial<Record<"en" | "zh-CN", {
+            label: string;
+        }>> | undefined;
     }>, "many">>>;
+    i18n: z.ZodOptional<z.ZodRecord<z.ZodUnion<[z.ZodLiteral<"en">, z.ZodLiteral<"zh-CN">]>, z.ZodObject<{
+        name: z.ZodString;
+        description: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        name: string;
+        description: string;
+    }, {
+        name: string;
+        description: string;
+    }>>>;
 }, "strip", z.ZodTypeAny, {
     id: string;
     name: string;
@@ -107,6 +130,9 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         } | {
             type: "any";
         })[];
+        i18n?: Partial<Record<"en" | "zh-CN", {
+            label: string;
+        }>> | undefined;
     }[];
     description?: string | undefined;
     logo?: string | undefined;
@@ -122,6 +148,10 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         height?: number | undefined;
         disableTransition?: boolean | undefined;
     } | undefined;
+    i18n?: Partial<Record<"en" | "zh-CN", {
+        name: string;
+        description: string;
+    }>> | undefined;
 }, {
     id: string;
     name: string;
@@ -143,6 +173,10 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         skipTaskbar?: boolean | undefined;
         focusable?: boolean | undefined;
     } | undefined;
+    i18n?: Partial<Record<"en" | "zh-CN", {
+        name: string;
+        description: string;
+    }>> | undefined;
     features?: {
         code: string;
         label: string;
@@ -154,6 +188,9 @@ export declare const PluginDefinitionSchema: z.ZodObject<{
         })[];
         hotKey?: boolean | undefined;
         searchable?: boolean | undefined;
+        i18n?: Partial<Record<"en" | "zh-CN", {
+            label: string;
+        }>> | undefined;
     }[] | undefined;
 }>;
 export type PluginDefinition = z.input<typeof PluginDefinitionSchema>;

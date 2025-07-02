@@ -45,7 +45,20 @@ export const PluginDefinitionSchema = z.object({
         type: z.literal('any'),  // 任意输入都会被匹配上
       })
     ])),
+    i18n: z.record(
+      z.union([z.literal('en'), z.literal('zh-CN')]),  // 支持的语言，当前仅支持英文(en)和中文(zh-CN)
+      z.object({
+        label: z.string(), // 对应语言的功能显示名称
+      })
+    ).optional()
   })).optional().default([]),
+  i18n: z.record(
+    z.union([z.literal('en'), z.literal('zh-CN')]),  // 支持的语言，当前仅支持英文(en)和中文(zh-CN)
+    z.object({
+      name: z.string(), // 对应语言的插件名称
+      description: z.string(), // 对应语言的插件描述
+    })
+  ).optional(), // 国际化相关
 });
 
 export type PluginDefinition = z.input<typeof PluginDefinitionSchema>;
